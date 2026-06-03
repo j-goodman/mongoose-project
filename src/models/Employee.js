@@ -10,4 +10,5 @@ const employeeSchema = new mongoose.Schema({
     dateJoined: { type: Date, required: true }
 })
 
-module.exports = mongoose.model("Employee", employeeSchema)
+const mongooseModel = mongoose.model("Employee", employeeSchema)
+module.exports = mongooseModel

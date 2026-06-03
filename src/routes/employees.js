@@ -8,4 +8,25 @@ router.post('/', async (req, res) => {
     res.status(201).json(newEmployee)
 })
 
+router.get('/', async (req, res) => {
+    const allEmployees = await Employee.find()
+    res.json(allEmployees)
+})
+
+router.get('/:id', async (req, res) => {
+    const employee = await Employee.findById(req.params.id)
+    if (!employee) {
+        return res.status(404).json({message: "Employee not found."})
+    }
+    res.json(employee)
+})
+
+router.delete('/:id', async (req, res) => {
+    const employee = await Employee.findByIdAndDelete(req.params.id)
+    if (!employee) {
+        return res.status(404).json({message: "Employee not found."})
+    }
+    res.json({message: "Successfully deleted employee."})
+})
+
 module.exports = router
